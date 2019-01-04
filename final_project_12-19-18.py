@@ -33,3 +33,23 @@ for row in cells:
         else:
             print(" ", end = " | ")
     print(" ")
+
+def check_neighbors(self):
+    """Check neighboring cells' status when given the center cell"""
+    #cell coordinates: (y,x)
+    #rows: (0,0) (0,1) (0,2) . . .
+    #cols: (0,0) (1,0) (2,0) . . .
+    n = ((self.y - 1), (self.x))
+    ne = ((self.y - 1), (self.x + 1))
+    e = ((self.y), (self.x + 1))
+    se = ((self.y + 1), (self.x + 1))
+    s = ((self.y + 1), (self.x))
+    sw = ((self.y + 1), (self.x - 1))
+    w = ((self.y), (self.x - 1))
+    nw = ((self.y - 1), (self.x - 1))
+    neighbors = [n, ne, e, se, s, sw, w, nw]
+    return print(neighbors)
+
+for row in cells:
+    for cell in row:
+        check_neighbors(cell)
