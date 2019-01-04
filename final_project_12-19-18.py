@@ -48,8 +48,4 @@ def check_neighbors(self):
     w = ((self.y), (self.x - 1))
     nw = ((self.y - 1), (self.x - 1))
     neighbors = [n, ne, e, se, s, sw, w, nw]
-    return print(neighbors)
-
-for row in cells:
-    for cell in row:
-        check_neighbors(cell)
+    return neighbors
