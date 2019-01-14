@@ -6,6 +6,20 @@
 
 import random
 import time
+import pygame
+
+pygame.init()
+window_width = 800
+window_height = 600
+window = pygame.display.set_mode((window_width, window_height))
+pygame.display.set_caption("game of life")
+clock = pygame.time.Clock()
+
+run = False
+while not run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = True
 
 rows = 10
 cols = 10
@@ -95,7 +109,7 @@ def print_grid():
             else:
                 print(" ", end = " | ")
         print(" ")
-    print("_________________________________________")
+    print("________________________________________")
 
 while True:
     print_grid()
