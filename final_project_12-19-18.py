@@ -5,6 +5,7 @@
     #4: Dead cell with exactly three neighbors becomes a live cell (reproduction)
 
 import random
+import time
 
 rows = 10
 cols = 10
@@ -43,9 +44,9 @@ class Cell:
         nw = ((self.north), (self.west))
         locations = [n, ne, e, se, s, sw, w, nw]
         neighbors = []
-        print(f"getting neighbors of {self.y} {self.x} now")
+        #print(f"getting neighbors of {self.y} {self.x} now - {self.alive}")
         for loc in locations:
-            print(loc)
+            #print(loc)
             neighbors.append(cells[loc[0]][loc[1]])
         return neighbors
 
@@ -55,32 +56,52 @@ class Cell:
         for n in neighbor_cells:
             if n.alive == True:
                 live_neighbors += 1
-        print(live_neighbors)
+        #print(live_neighbors)
         return live_neighbors
 
+    def next_gen(self, live_neighbors):
+        """Move from one generation to the next; determine if cells survive based on number of live neighbors"""
+        if self.alive == True:
+            if live_neighbors < 2:
+                self.alive = False
+            elif live_neighbors == 2 or live_neighbors == 3:
+                self.alive = True
+            elif live_neighbors >= 4:
+                self.alive = False
+        if self.alive == False:
+            if live_neighbors == 3:
+                self.alive = True
+        #print(f"{self.alive}")
 
-    def __str__(self):
-        return f"{self.x}, {self.y}: {self.alive}"
-    __repr__ = __str__
+    #def __str__(self):
+        #return f"{self.x}, {self.y}: {self.alive}"
+    #__repr__ = __str__
 
 cells = []
 
 for y in range(rows):
-    print("Making a row")
+    #print("Making a row")
     row = []
     for x in range(cols):
         row.append(Cell(x, y, random.choice([True, False])))
     cells.append(row)
 
-for row in cells:
-    for cell in row:
-        if cell.alive:
-            print("X", end = " | ")
-        else:
-            print(" ", end = " | ")
-    print(" ")
+def print_grid():
+    """print grid for game, marking all live cells"""
+    for row in cells:
+        for cell in row:
+            if cell.alive:
+                print("X", end = " | ")
+            else:
+                print(" ", end = " | ")
+        print(" ")
+    print("_________________________________________")
 
-for row in cells:
-    for cell in row:
-        neighbors = cell.check_neighbors()
-        cell.neighbors_status(neighbors)
+while True:
+    print_grid()
+    time.sleep(1)
+    for row in cells:
+        for cell in row:
+            neighbors = cell.check_neighbors()
+            live_neighbors = cell.neighbors_status(neighbors)
+            cell.next_gen(live_neighbors)
