@@ -7,22 +7,28 @@
 import random
 import time
 import pygame
-
+import sys
 pygame.init()
-window_width = 800
-window_height = 600
-window = pygame.display.set_mode((window_width, window_height))
-pygame.display.set_caption("game of life")
-clock = pygame.time.Clock()
-
-run = False
-while not run:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = True
 
 rows = 10
 cols = 10
+width = 800
+height = 600
+cell_width = width // cols
+cell_height = height // rows
+screen = pygame.display.set_mode((width, height))
+
+while True:
+    for e in pygame.event.get():
+        if e.type == pygame.QUIT:
+            sys.exit()
+
+bg_color = (125, 125, 125)
+screen.fill(bg_color)
+pygame.display.set_caption("Game of Life")
+pygame.display.flip()
+
+
 
 class Cell:
     def __init__(self, x, y, alive):
@@ -111,8 +117,18 @@ def print_grid():
         print(" ")
     print("________________________________________")
 
+for row in range(rows):
+    for cell in range(cols):
+        if cell.alive == True:
+            pygame.draw.rect(screen, (0, 0, 0), (cell*cell_width, row*cell_height, cell_width, cell_height))
+        else:
+            pygame.draw.rect(screen, (255, 255, 255), (cell*cell_width, row*cell_height, cell_width, cell_height))
+
+pygame.display.flip()
+
 while True:
-    print_grid()
+    #print_grid()
+    pygame.display.flip()
     time.sleep(1)
     for row in cells:
         for cell in row:
