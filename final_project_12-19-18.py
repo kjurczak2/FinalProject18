@@ -8,6 +8,7 @@ import random
 import time
 import pygame
 import sys
+
 pygame.init()
 
 rows = 10
@@ -17,18 +18,12 @@ height = 600
 cell_width = width // cols
 cell_height = height // rows
 screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Game of Life")
 
 while True:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             sys.exit()
-
-bg_color = (125, 125, 125)
-screen.fill(bg_color)
-pygame.display.set_caption("Game of Life")
-pygame.display.flip()
-
-
 
 class Cell:
     def __init__(self, x, y, alive):
@@ -117,19 +112,22 @@ def print_grid():
         print(" ")
     print("________________________________________")
 
-for row in range(rows):
-    for cell in range(cols):
-        if cell.alive == True:
-            pygame.draw.rect(screen, (0, 0, 0), (cell*cell_width, row*cell_height, cell_width, cell_height))
-        else:
-            pygame.draw.rect(screen, (255, 255, 255), (cell*cell_width, row*cell_height, cell_width, cell_height))
-
-pygame.display.flip()
+def screen_update():
+    """update screen with live game data"""
+    for row in range(rows):
+        for cell in range(cols):
+            if cell.alive == True:
+                pygame.draw.rect(screen, (0, 0, 0), (cell*cell_width, cell*cell_height, cell_width, cell_height))
+                pygame.display.flip()
+            else:
+                pygame.draw.rect(screen, (255, 255, 255), (cell*cell_width, cell*cell_height, cell_width, cell_height))
+                pygame.display.flip()
+    pygame.display.flip()
+    time.sleep(0.5)
 
 while True:
-    #print_grid()
-    pygame.display.flip()
-    time.sleep(1)
+    print_grid()
+    #screen_update()
     for row in cells:
         for cell in row:
             neighbors = cell.check_neighbors()
