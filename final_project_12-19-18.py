@@ -112,24 +112,20 @@ def print_grid():
         print(" ")
     print("________________________________________")
 
-def screen_update():
-    """update screen with live game data"""
-    for row in range(rows):
-        for cell in range(cols):
-            if cell.alive == True:
-                pygame.draw.rect(screen, (0, 0, 0), (cell*cell_width, cell*cell_height, cell_width, cell_height))
-                pygame.display.flip()
-            else:
-                pygame.draw.rect(screen, (255, 255, 255), (cell*cell_width, cell*cell_height, cell_width, cell_height))
-                pygame.display.flip()
-    pygame.display.flip()
-    time.sleep(0.5)
-
 while True:
-    #print_grid()
-    screen_update()
+    print_grid()
     for row in cells:
         for cell in row:
             neighbors = cell.check_neighbors()
             live_neighbors = cell.neighbors_status(neighbors)
             cell.next_gen(live_neighbors)
+    for row in range(rows):
+        for cell in range(cols):
+            if cell.alive == True:
+                pygame.draw.rect(screen, (0, 0, 0), (cell*cell_width, row*cell_height, cell_width, cell_height))
+                pygame.display.flip()
+            else:
+                pygame.draw.rect(screen, (255, 255, 255), (cell*cell_width, row*cell_height, cell_width, cell_height))
+                pygame.display.flip()
+    pygame.display.flip()
+    time.sleep(0.5)
