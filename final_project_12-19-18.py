@@ -20,11 +20,6 @@ cell_height = height // rows
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Game of Life")
 
-while True:
-    for e in pygame.event.get():
-        if e.type == pygame.QUIT:
-            sys.exit()
-
 class Cell:
     def __init__(self, x, y, alive):
         self.x = x
@@ -113,19 +108,20 @@ def print_grid():
     print("________________________________________")
 
 while True:
-    print_grid()
+    #print_grid()
+    for e in pygame.event.get():
+        if e.type == pygame.QUIT:
+            sys.exit()
     for row in cells:
         for cell in row:
             neighbors = cell.check_neighbors()
             live_neighbors = cell.neighbors_status(neighbors)
             cell.next_gen(live_neighbors)
     for row in range(rows):
-        for cell in range(cols):
+        for col in range(cols):
             if cell.alive == True:
-                pygame.draw.rect(screen, (0, 0, 0), (cell*cell_width, row*cell_height, cell_width, cell_height))
-                pygame.display.flip()
+                pygame.draw.rect(screen, (0, 0, 0), (col*cell_width, row*cell_height, cell_width, cell_height))
             else:
-                pygame.draw.rect(screen, (255, 255, 255), (cell*cell_width, row*cell_height, cell_width, cell_height))
-                pygame.display.flip()
-    pygame.display.flip()
-    time.sleep(0.5)
+                pygame.draw.rect(screen, (255, 255, 255), (col*cell_width, row*cell_height, cell_width, cell_height))
+            pygame.display.flip()
+            time.sleep(0.5)
