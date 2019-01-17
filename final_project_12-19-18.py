@@ -126,8 +126,8 @@ def screen_update():
     time.sleep(0.5)
 
 while True:
-    print_grid()
-    #screen_update()
+    #print_grid()
+    screen_update()
     for row in cells:
         for cell in row:
             neighbors = cell.check_neighbors()
