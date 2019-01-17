@@ -11,8 +11,8 @@ import sys
 
 pygame.init()
 
-rows = 10
-cols = 10
+rows = 25
+cols = 25
 width = 800
 height = 600
 cell_width = width // cols
@@ -93,7 +93,9 @@ for y in range(rows):
     #print("Making a row")
     row = []
     for x in range(cols):
-        row.append(Cell(x, y, random.choice([True, False])))
+        ran = random.choice([True, False])
+        #print (ran)
+        row.append(Cell(x, y, ran))
     cells.append(row)
 
 def print_grid():
@@ -119,9 +121,9 @@ while True:
             cell.next_gen(live_neighbors)
     for row in range(rows):
         for col in range(cols):
-            if cell.alive == True:
+            if cells[row][col].alive == True:
                 pygame.draw.rect(screen, (0, 0, 0), (col*cell_width, row*cell_height, cell_width, cell_height))
             else:
                 pygame.draw.rect(screen, (255, 255, 255), (col*cell_width, row*cell_height, cell_width, cell_height))
             pygame.display.flip()
-            time.sleep(0.5)
+    time.sleep(0.125)
