@@ -1,9 +1,13 @@
-# Intro to Programming Final Project - Fall 2018
+Final Project 18-19: Game of Life
 
-* Project details are in description.md
-* Replace the content of this file with your own info about your project before the due date
-* Don't forget to fill out the [Project Proposal Form](https://airtable.com/shrrdA41unoBvi6Ki) before break.
-
-## Setting Up Your Repo
-
-On the GitHub page for this repository, click the "Fork" button. This will create your own copy of this repository, linked to my original. Use the same cloning method we used before to clone the repository to your PythonAnywhere account
+Conway's Game of Life is a game that requires no player other than the computer.
+The grid created represents a colony of cells.  The game starts with a random dispersion of live and dead cells.
+The game progresses through different generations, each generation different from the previous one.
+The rules that determine changes between generations are as follows:
+  A live cell with fewer than two neighbor dies (underpopulation)
+  A live cell with two or three neighbors survives
+  A live cell with more than three neighbors dies (overpopulation)
+  A dead cell with exactly three neighbors becomes a live cell (reproduction)
+  
+Source for the rules:
+“Conway's Game of Life.” Wikipedia, Wikimedia Foundation, 23 Jan. 2019, en.wikipedia.org/wiki/Conway's_Game_of_Life.
