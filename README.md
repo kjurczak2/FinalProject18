@@ -15,8 +15,11 @@ The rules that determine changes between generations are as follows:
   A live cell with more than three neighbors dies (overpopulation)
   
   A dead cell with exactly three neighbors becomes a live cell (reproduction)
-  
-  
+   
 Source for the rules:
 
 “Conway's Game of Life.” Wikipedia, Wikimedia Foundation, 23 Jan. 2019, en.wikipedia.org/wiki/Conway's_Game_of_Life.
+
+A link to the flowchart of the code can be found here:
+
+https://drive.google.com/file/d/1Eu8OkbE9eHxe-hQUpGRhxXx2yKwZJ880/view?usp=sharing
